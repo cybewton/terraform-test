@@ -10,10 +10,10 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.1.0.0/16"]
 }
 
-# resource "azurerm_subnet" "subnet" {
-#   count                = 50
-#   name                 = "terraform-controller-subnet"
-#   resource_group_name  = azurerm_resource_group.example.name
-#   virtual_network_name = azurerm_virtual_network.vnet.name
-#   address_prefixes     = ["10.1.${count.index + 1}.0/24"]
-# }
+resource "azurerm_subnet" "subnet" {
+  count                = 3
+  name                 = "terraform-controller-subnet"
+  resource_group_name  = azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.1.${count.index + 1}.0/24"]
+}
